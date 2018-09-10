@@ -12,6 +12,9 @@
 		112CC8B92146C1F000DE597C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112CC8B72146C1F000DE597C /* Main.storyboard */; };
 		112CC8BB2146C1F000DE597C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 112CC8BA2146C1F000DE597C /* Assets.xcassets */; };
 		112CC8BE2146C1F000DE597C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112CC8BC2146C1F000DE597C /* LaunchScreen.storyboard */; };
+		112CC8C62146C22000DE597C /* WSBFvI_Round1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */; };
+		112CC8C82146C2CB00DE597C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC8C72146C2CB00DE597C /* Data.swift */; };
+		112CC8CA2146C41900DE597C /* csv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC8C92146C41900DE597C /* csv.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		112CC8BA2146C1F000DE597C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		112CC8BD2146C1F000DE597C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		112CC8BF2146C1F000DE597C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WSBFvI_Round1.csv; sourceTree = "<group>"; };
+		112CC8C72146C2CB00DE597C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		112CC8C92146C41900DE597C /* csv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = csv.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				112CC8B32146C1F000DE597C /* AppDelegate.swift */,
+				112CC8C72146C2CB00DE597C /* Data.swift */,
+				112CC8C92146C41900DE597C /* csv.swift */,
 				112CC8B52146C1F000DE597C /* ViewController.swift */,
 				112CC8B72146C1F000DE597C /* Main.storyboard */,
 				112CC8BA2146C1F000DE597C /* Assets.xcassets */,
 				112CC8BC2146C1F000DE597C /* LaunchScreen.storyboard */,
 				112CC8BF2146C1F000DE597C /* Info.plist */,
+				112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */,
 			);
 			path = iOSTaskCornerWearables;
 			sourceTree = "<group>";
@@ -123,6 +132,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112CC8C62146C22000DE597C /* WSBFvI_Round1.csv in Resources */,
 				112CC8BE2146C1F000DE597C /* LaunchScreen.storyboard in Resources */,
 				112CC8BB2146C1F000DE597C /* Assets.xcassets in Resources */,
 				112CC8B92146C1F000DE597C /* Main.storyboard in Resources */,
@@ -136,7 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112CC8CA2146C41900DE597C /* csv.swift in Sources */,
 				112CC8B62146C1F000DE597C /* ViewController.swift in Sources */,
+				112CC8C82146C2CB00DE597C /* Data.swift in Sources */,
 				112CC8B42146C1F000DE597C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
