@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         parseDataFromCSV()
         parseStat()
         parseBreakdowns()
+        print("ljlé")
     }
     
     func parseDataFromCSV() {
