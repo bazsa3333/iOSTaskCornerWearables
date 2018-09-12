@@ -15,6 +15,8 @@
 		112CC8C62146C22000DE597C /* WSBFvI_Round1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */; };
 		112CC8C82146C2CB00DE597C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC8C72146C2CB00DE597C /* Data.swift */; };
 		112CC8CA2146C41900DE597C /* csv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC8C92146C41900DE597C /* csv.swift */; };
+		11D118792149851C00CF674A /* PlayPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D118782149851C00CF674A /* PlayPause.swift */; };
+		8DCE6A8AA07154A2B5176CF7 /* Pods_iOSTaskCornerWearables.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B25B64603994940426A2E26 /* Pods_iOSTaskCornerWearables.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,10 @@
 		112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WSBFvI_Round1.csv; sourceTree = "<group>"; };
 		112CC8C72146C2CB00DE597C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		112CC8C92146C41900DE597C /* csv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = csv.swift; sourceTree = "<group>"; };
+		11D118782149851C00CF674A /* PlayPause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPause.swift; sourceTree = "<group>"; };
+		147C7C463F4FF2900A8F04D7 /* Pods-iOSTaskCornerWearables.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTaskCornerWearables.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSTaskCornerWearables/Pods-iOSTaskCornerWearables.release.xcconfig"; sourceTree = "<group>"; };
+		7B25B64603994940426A2E26 /* Pods_iOSTaskCornerWearables.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSTaskCornerWearables.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C306EBAA04C5064761F57EC9 /* Pods-iOSTaskCornerWearables.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTaskCornerWearables.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSTaskCornerWearables/Pods-iOSTaskCornerWearables.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DCE6A8AA07154A2B5176CF7 /* Pods_iOSTaskCornerWearables.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +53,8 @@
 			children = (
 				112CC8B22146C1F000DE597C /* iOSTaskCornerWearables */,
 				112CC8B12146C1F000DE597C /* Products */,
+				3F19676BE016D8A74C4E3787 /* Pods */,
+				BF1957C9460422736888EF9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,8 +78,26 @@
 				112CC8BC2146C1F000DE597C /* LaunchScreen.storyboard */,
 				112CC8BF2146C1F000DE597C /* Info.plist */,
 				112CC8C52146C22000DE597C /* WSBFvI_Round1.csv */,
+				11D118782149851C00CF674A /* PlayPause.swift */,
 			);
 			path = iOSTaskCornerWearables;
+			sourceTree = "<group>";
+		};
+		3F19676BE016D8A74C4E3787 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C306EBAA04C5064761F57EC9 /* Pods-iOSTaskCornerWearables.debug.xcconfig */,
+				147C7C463F4FF2900A8F04D7 /* Pods-iOSTaskCornerWearables.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BF1957C9460422736888EF9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B25B64603994940426A2E26 /* Pods_iOSTaskCornerWearables.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 112CC8C22146C1F000DE597C /* Build configuration list for PBXNativeTarget "iOSTaskCornerWearables" */;
 			buildPhases = (
+				8E4E5FD141812BD1D6C1B521 /* [CP] Check Pods Manifest.lock */,
 				112CC8AC2146C1F000DE597C /* Sources */,
 				112CC8AD2146C1F000DE597C /* Frameworks */,
 				112CC8AE2146C1F000DE597C /* Resources */,
+				B32BD68CBAE9761A7BEF5DC1 /* [CP] Embed Pods Frameworks */,
+				DABFE3FD31693FADE941FF5A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,11 +171,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8E4E5FD141812BD1D6C1B521 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B32BD68CBAE9761A7BEF5DC1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSTaskCornerWearables/Pods-iOSTaskCornerWearables-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DABFE3FD31693FADE941FF5A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSTaskCornerWearables/Pods-iOSTaskCornerWearables-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		112CC8AC2146C1F000DE597C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D118792149851C00CF674A /* PlayPause.swift in Sources */,
 				112CC8CA2146C41900DE597C /* csv.swift in Sources */,
 				112CC8B62146C1F000DE597C /* ViewController.swift in Sources */,
 				112CC8C82146C2CB00DE597C /* Data.swift in Sources */,
@@ -284,6 +363,7 @@
 		};
 		112CC8C32146C1F000DE597C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C306EBAA04C5064761F57EC9 /* Pods-iOSTaskCornerWearables.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +379,7 @@
 		};
 		112CC8C42146C1F000DE597C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 147C7C463F4FF2900A8F04D7 /* Pods-iOSTaskCornerWearables.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

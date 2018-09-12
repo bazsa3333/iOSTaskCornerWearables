@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Charts
 
 class ViewController: UIViewController {
 
@@ -22,13 +23,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var rightUCLbl: UILabel!
     var datas = [Data]()
     
+    @IBOutlet weak var rightHorizontalBarChart: HorizontalBarChartView!
+    @IBOutlet weak var leftHorizontalBarChart: HorizontalBarChartView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         parseDataFromCSV()
         parseStat()
-        parseBreakdowns()
-        print("ljlé")
+        parseBreakdowns(count: 3)
     }
     
     func parseDataFromCSV() {
@@ -72,7 +76,7 @@ class ViewController: UIViewController {
         punchesLbl.text = String(datas.count)
     }
     
-    func parseBreakdowns() {
+    func parseBreakdowns(count: Int) {
 
         var jab: Int = 0
         var cross: Int = 0
@@ -82,7 +86,6 @@ class ViewController: UIViewController {
         var leftUC: Int = 0
 
         for index in 0..<datas.count {
-            
             if datas[index].punch_type_id == 0 {
 
                 jab += 1
@@ -103,13 +106,126 @@ class ViewController: UIViewController {
                 rightUC += 1
             }
         }
-
+        
+        let numbers = [jab, cross, leftHook, rightHook, leftUC, rightUC]
+        var maxNumber = Int()
+        
+        for number in numbers {
+            maxNumber = max(maxNumber, number as Int)
+        }
+        
         jabLbl.text = String(jab)
         crossLbl.text = String(cross)
         rightHookLbl.text = String(rightHook)
         leftHookLbl.text = String(leftHook)
         rightUCLbl.text = String(rightUC)
         leftUCLbl.text = String(leftUC)
+        
+        rightHorizontalBarChart.drawBarShadowEnabled = false
+        rightHorizontalBarChart.drawValueAboveBarEnabled = true
+        leftHorizontalBarChart.drawBarShadowEnabled = false
+        leftHorizontalBarChart.drawValueAboveBarEnabled = true
+        
+        rightHorizontalBarChart.maxVisibleCount = 100
+        rightHorizontalBarChart.backgroundColor = UIColor.black
+        rightHorizontalBarChart.drawBordersEnabled = false
+        rightHorizontalBarChart.chartDescription?.textColor = UIColor.black
+        leftHorizontalBarChart.maxVisibleCount = 100
+        leftHorizontalBarChart.backgroundColor = UIColor.black
+        leftHorizontalBarChart.drawBordersEnabled = false
+        leftHorizontalBarChart.chartDescription?.textColor = UIColor.black
+    
+        let xAxisForRight  = rightHorizontalBarChart.xAxis
+        xAxisForRight.enabled = false
+        let xAxisForLeft  = leftHorizontalBarChart.xAxis
+        xAxisForLeft.enabled = false
+        
+        let leftAxisForRight = rightHorizontalBarChart.leftAxis
+        leftAxisForRight.enabled = false
+        leftAxisForRight.drawAxisLineEnabled = false
+        leftAxisForRight.drawGridLinesEnabled = false
+        leftAxisForRight.axisMinimum = 0.0
+        leftAxisForRight.axisMaximum = Double(maxNumber)
+        let leftAxisForLeft = leftHorizontalBarChart.leftAxis
+        leftAxisForLeft.enabled = false
+        leftAxisForLeft.drawAxisLineEnabled = false
+        leftAxisForLeft.drawGridLinesEnabled = false
+        leftAxisForLeft.axisMinimum = 0.0
+        leftAxisForLeft.axisMaximum = Double(maxNumber)
+        
+        let rightAxisForRight = rightHorizontalBarChart.rightAxis
+        rightAxisForRight.enabled = false
+        rightAxisForRight.drawAxisLineEnabled = false
+        rightAxisForRight.drawGridLinesEnabled = false
+        rightAxisForRight.axisMinimum = 0.0
+        let rightAxisForLeft = leftHorizontalBarChart.rightAxis
+        rightAxisForLeft.enabled = false
+        rightAxisForLeft.drawAxisLineEnabled = false
+        rightAxisForLeft.drawGridLinesEnabled = false
+        rightAxisForLeft.axisMinimum = 0.0
+        
+        let labelRight = rightHorizontalBarChart.legend
+        labelRight.enabled =  false
+        let labelLeft = leftHorizontalBarChart.legend
+        labelLeft.enabled =  false
+        
+        rightHorizontalBarChart.fitBars = false
+        leftHorizontalBarChart.fitBars = false
+        
+        let barWidth = 1.0
+        let spaceForBar =  10.0;
+        
+        var yValsForRight = [BarChartDataEntry]()
+        
+        yValsForRight.append(BarChartDataEntry(x: 0 * spaceForBar, y: Double(rightUC)))
+        yValsForRight.append(BarChartDataEntry(x: 1 * spaceForBar, y: Double(rightHook)))
+        yValsForRight.append(BarChartDataEntry(x: 2 * spaceForBar, y: Double(cross)))
+        
+        var yValsForLeft = [BarChartDataEntry]()
+        
+        yValsForLeft.append(BarChartDataEntry(x: 0 * spaceForBar, y: Double(leftUC)))
+        yValsForLeft.append(BarChartDataEntry(x: 1 * spaceForBar, y: Double(leftHook)))
+        yValsForLeft.append(BarChartDataEntry(x: 2 * spaceForBar, y: Double(jab)))
+        
+        let set1 = BarChartDataSet(values: yValsForRight, label: nil)
+        let color1 = UIColor(red: 0, green: 195, blue: 250)
+        set1.colors = [color1]
+        let data1 = BarChartData(dataSet: set1)
+        data1.barWidth = barWidth
+        rightHorizontalBarChart.data = data1
+        rightHorizontalBarChart.notifyDataSetChanged()
+        
+        let set2 = BarChartDataSet(values: yValsForLeft, label: nil)
+        let color2 = UIColor(red: 35, green: 183, blue: 49)
+        set2.colors = [color2]
+        let data2 = BarChartData(dataSet: set2)
+        data2.barWidth = barWidth
+        leftHorizontalBarChart.data = data2
+        leftHorizontalBarChart.notifyDataSetChanged()
+        leftHorizontalBarChart.flipX()
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+    }
+}
+
+extension UIView {
+    
+    // Flip view horizontally.
+    func flipX() {
+        transform = CGAffineTransform(scaleX: -transform.a, y: transform.d)
+    }
+    
+    // Flip view vertically.
+    func flipY() {
+        transform = CGAffineTransform(scaleX: transform.a, y: -transform.d)
     }
 }
 
