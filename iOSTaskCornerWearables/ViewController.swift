@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var crossLbl: UILabel!
     @IBOutlet weak var rightHookLbl: UILabel!
     @IBOutlet weak var rightUCLbl: UILabel!
+    @IBOutlet weak var maxIntensityLbl: UILabel!
+    @IBOutlet weak var minIntensityLbl: UILabel!
     var datas = [Data]()
     
     @IBOutlet weak var rightHorizontalBarChart: HorizontalBarChartView!
@@ -33,6 +35,7 @@ class ViewController: UIViewController {
         parseDataFromCSV()
         parseStat()
         parseBreakdowns(count: 3)
+        maxAndMinIntensity(expectedVal: 8.33)
     }
     
     func parseDataFromCSV() {
@@ -203,6 +206,74 @@ class ViewController: UIViewController {
         leftHorizontalBarChart.data = data2
         leftHorizontalBarChart.notifyDataSetChanged()
         leftHorizontalBarChart.flipX()
+    }
+    
+    func timeAnalysing() -> [Int] {
+        
+        var periods = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        var times = [Double]()
+        
+        for index in 0..<datas.count {
+            
+            let splitTimeArr = datas[index].ts.split(separator: ":")
+            let hour = round(Double(splitTimeArr[0])! * 1000) / 1000
+            let min = round(Double(splitTimeArr[1])! * 1000) / 1000
+            let sec = round(Double(splitTimeArr[2])! * 1000) / 1000
+            let totalSec = (hour * 3600) + (min * 60) + sec
+            
+            times.append(totalSec)
+        }
+        
+        for index in 0..<times.count {
+
+            if times[index] <= 15 {
+                periods[0] += 1
+            } else if (times[index] > 15) && (times[index] <= 30) {
+                periods[1] += 1
+            } else if (times[index] > 30) && (times[index] <= 45) {
+                periods[2] += 1
+            } else if (times[index] > 45) && (times[index] <= 60) {
+                periods[3] += 1
+            } else if (times[index] > 60) && (times[index] <= 75) {
+                periods[4] += 1
+            } else if (times[index] > 75) && (times[index] <= 90) {
+                periods[5] += 1
+            } else if (times[index] > 90) && (times[index] <= 105) {
+                periods[6] += 1
+            } else if (times[index] > 105) && (times[index] <= 120) {
+                periods[7] += 1
+            } else if (times[index] > 120) && (times[index] <= 135) {
+                periods[8] += 1
+            } else if (times[index] > 135) && (times[index] <= 150) {
+                periods[9] += 1
+            } else if (times[index] > 150) && (times[index] <= 165) {
+                periods[10] += 1
+            } else {
+                periods[11] += 1
+            }
+        }
+        
+        return periods
+    }
+    
+    func maxAndMinIntensity(expectedVal: Double) {
+        
+        let periods = timeAnalysing()
+        var intensities = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        
+        for index in 0..<periods.count {
+            
+            if periods[index] == 0 {
+                intensities[index] = 0
+            } else if Double(periods[index]) < expectedVal {
+                intensities[index] = Int((100 - ((Double(periods[index]) / expectedVal) * 100)) * (-1))
+            } else {
+                intensities[index] = Int(((Double(periods[index]) - expectedVal) / expectedVal) * 100)
+            }
+        }
+        
+        maxIntensityLbl.text = "MAX: \(intensities.max()!) %"
+        minIntensityLbl.text = "MIN: \(intensities.min()!) %"
     }
 }
 
