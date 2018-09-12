@@ -22,11 +22,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var rightHookLbl: UILabel!
     @IBOutlet weak var rightUCLbl: UILabel!
     @IBOutlet weak var maxIntensityLbl: UILabel!
-    @IBOutlet weak var minIntensityLbl: UILabel!
+    @IBOutlet weak var minIntesityLbl: UILabel!
     var datas = [Data]()
     
     @IBOutlet weak var rightHorizontalBarChart: HorizontalBarChartView!
     @IBOutlet weak var leftHorizontalBarChart: HorizontalBarChartView!
+    @IBOutlet weak var lineChartView: LineChartView!
     
     
     override func viewDidLoad() {
@@ -128,6 +129,10 @@ class ViewController: UIViewController {
         rightHorizontalBarChart.drawValueAboveBarEnabled = true
         leftHorizontalBarChart.drawBarShadowEnabled = false
         leftHorizontalBarChart.drawValueAboveBarEnabled = true
+        rightHorizontalBarChart.pinchZoomEnabled = false
+        rightHorizontalBarChart.doubleTapToZoomEnabled = false
+        leftHorizontalBarChart.pinchZoomEnabled = false
+        leftHorizontalBarChart.doubleTapToZoomEnabled = false
         
         rightHorizontalBarChart.maxVisibleCount = 100
         rightHorizontalBarChart.backgroundColor = UIColor.black
@@ -193,6 +198,7 @@ class ViewController: UIViewController {
         let set1 = BarChartDataSet(values: yValsForRight, label: nil)
         let color1 = UIColor(red: 0, green: 195, blue: 250)
         set1.colors = [color1]
+        set1.highlightEnabled = false
         let data1 = BarChartData(dataSet: set1)
         data1.barWidth = barWidth
         rightHorizontalBarChart.data = data1
@@ -201,6 +207,7 @@ class ViewController: UIViewController {
         let set2 = BarChartDataSet(values: yValsForLeft, label: nil)
         let color2 = UIColor(red: 35, green: 183, blue: 49)
         set2.colors = [color2]
+        set2.highlightEnabled = false
         let data2 = BarChartData(dataSet: set2)
         data2.barWidth = barWidth
         leftHorizontalBarChart.data = data2
@@ -272,8 +279,51 @@ class ViewController: UIViewController {
             }
         }
         
-        maxIntensityLbl.text = "MAX: \(intensities.max()!) %"
-        minIntensityLbl.text = "MIN: \(intensities.min()!) %"
+        maxIntensityLbl.text = "+\(intensities.max()!)%"
+        minIntesityLbl.text = "-\(intensities.min()!)%"
+        
+        lineChartView.backgroundColor = UIColor.black
+        lineChartView.chartDescription = nil
+        lineChartView.pinchZoomEnabled = false
+        lineChartView.drawGridBackgroundEnabled = false
+        lineChartView.doubleTapToZoomEnabled = false
+        lineChartView.maxVisibleCount = 100
+        
+        let xAxis = lineChartView.xAxis
+        xAxis.enabled = false
+        xAxis.drawGridLinesEnabled = false
+        
+        let leftAxis = lineChartView.rightAxis
+        leftAxis.enabled = false
+        leftAxis.drawGridLinesEnabled = false
+        leftAxis.axisMaximum = 100
+        leftAxis.axisMinimum = 0
+        
+        let rightAxis = lineChartView.leftAxis
+        rightAxis.enabled = false
+        rightAxis.drawGridLinesEnabled = false
+        
+        var entries = [ChartDataEntry]()
+        
+        for index in 0..<intensities.count {
+            entries.append(ChartDataEntry(x: Double(index * 15), y: round(Double(intensities[index]) * 1) / 1))
+        }
+        
+        let set = LineChartDataSet(values: entries, label: nil)
+        set.highlightLineWidth = 0.0
+        set.drawCircleHoleEnabled = false
+        set.drawCirclesEnabled = false
+        set.colors = [UIColor(red: 135, green: 135, blue: 135)]
+        set.lineWidth = 5.0
+        
+        let data = LineChartData(dataSet: set)
+        
+        data.setDrawValues(false)
+//        data.setValueFont(UIFont(name: "Avenir", size: 15.0))
+//        data.setValueTextColor(UIColor(red: 59, green: 213, blue: 0))
+        
+        lineChartView.data = data
+        lineChartView.notifyDataSetChanged()
     }
 }
 
