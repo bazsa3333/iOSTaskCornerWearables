@@ -290,8 +290,12 @@ class ViewController: UIViewController {
         lineChartView.maxVisibleCount = 100
         
         let xAxis = lineChartView.xAxis
-        xAxis.enabled = false
-        xAxis.drawGridLinesEnabled = false
+        //set to false and the X axis disappear
+        xAxis.enabled = true
+        xAxis.drawGridLinesEnabled = true
+        xAxis.labelTextColor = UIColor.white
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = UIFont(name: "Avenir", size: 12.0)!
         
         let leftAxis = lineChartView.rightAxis
         leftAxis.enabled = false
